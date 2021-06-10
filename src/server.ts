@@ -2,6 +2,7 @@ import http from 'http'
 import express from 'express'
 import logging from './config/logging'
 import config from './config/config'
+import * as path from "path";
 
 
 const NAMESPACE = 'Server'  // What we use to determine where logs are coming from
@@ -10,8 +11,19 @@ const app = express()
 /* Connect to MongoDB */
 require("./config/database");
 
+app.use(express.static(path.join(__dirname, '/../client/build')));
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/../client/build/index.html'));
+// });
+
 /** Require the routes **/
 const userScoreRoutes = require('./routes/userscore')
+
+
+
+
 
 /**  Logging the request  **/
 app.use((req, res, next) => {
