@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-const baseUrl: string = 'https://localhost:1337/api'
+const baseUrl: string = 'http://localhost:1337/api'
 
 export const saveRequest = async (username: string, score: number,  difficulty: string) => {
   try {
